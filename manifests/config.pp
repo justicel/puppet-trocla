@@ -8,11 +8,13 @@ class trocla::config (
   file{
     #should be
     "${settings::confdir}/troclarc.yaml":
-#    "/var/lib/puppet/troclarc.yaml":
-      ensure => present,
+      ensure  => present,
       content => template('trocla/troclarc.yaml.erb'),
-      owner => root,
-      group => puppet,
-      mode => 0640
+      owner   => root,
+      group   => puppet,
+      mode    => 0640;
+    '/etc/troclarc.yaml':
+      ensure => link,
+      target => "${settings::confdir}/troclarc.yaml";
   }
 }
