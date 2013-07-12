@@ -7,8 +7,8 @@ class trocla::config (
 # deploy default config file and link it for trocla cli lookup
   file{
     #should be
-#${settings::confdir}/troclarc.yaml
-    "/var/lib/puppet/troclarc.yaml":
+    "${settings::confdir}/troclarc.yaml":
+#    "/var/lib/puppet/troclarc.yaml":
       ensure => present,
       content => template('trocla/troclarc.yaml.erb'),
       owner => root,
