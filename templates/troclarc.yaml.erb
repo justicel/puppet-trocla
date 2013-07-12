@@ -2,8 +2,8 @@
 options:
     random: true
     length: 16 
-adapter: <%= adapter %>
+adapter: :<%= @adapter %>
 adapter_options:
-<% adapter_options.each do |key,value| -%>
-    :<%= key -%>: '<%= value -%>'
+<% @adapter_options.each do |key,value| -%>
+    :<%= @key -%>: '<%= @value -%>'
 <% end -%>
