@@ -1,26 +1,18 @@
-# deploy a trocla config
-class trocla::config($ruby='system') {
-  if $trocla::config::ruby == 'system' or $trocla::config::ruby == 'both' {
-    require trocla::master
-  }
-  if $trocla::config::ruby == 'ree' or $trocla::config::ruby == 'both' {
-    require trocla::master::ree
-  }
+class trocla::config (
+  $adapter = undef,
+  $adapter_options = [ 'default' => '' ],
+) {
+  require trocla::master
 
-  # deploy default config file and link it for trocla cli lookup
+# deploy default config file and link it for trocla cli lookup
   file{
-    "${settings::confdir}/troclarc.yaml":
-      content => "---\nadapter_options:\n    :file: ${settings::confdir}/trocla_data.yaml\n",
-      owner   => root,
-      group   => puppet,
-      mode    => '0640';
-    '/etc/troclarc.yaml':
-      ensure  => link,
-      target  => "${settings::confdir}/troclarc.yaml";
-    "${settings::confdir}/trocla_data.yaml":
-      ensure  => present,
-      owner   => puppet,
-      group   => 0,
-      mode    => '0600';
+    #should be
+#${settings::confdir}/troclarc.yaml
+    "/var/lib/puppet/troclarc.yaml":
+      ensure => present,
+      content => template('trocla/troclarc.yaml.erb'),
+      owner => root,
+      group => puppet,
+      mode => 0640
   }
 }
