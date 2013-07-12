@@ -5,5 +5,5 @@ options:
 adapter: :<%= @adapter %>
 adapter_options:
 <% @adapter_options.each do |key,value| -%>
-    :<%= @key -%>: '<%= @value -%>'
+    :<%= key -%>: '<%= value -%>'
 <% end -%>
