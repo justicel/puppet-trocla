@@ -1,7 +1,7 @@
 ---
 options:
     random: true
-    length: 16 
+    length: <%= @keysize %> 
 adapter: :<%= @adapter %>
 adapter_options:
 <% @adapter_options.each do |key,value| -%>
